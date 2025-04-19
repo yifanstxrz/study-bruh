@@ -11,29 +11,10 @@
   </head>
 
   <body>
-    <header id="navbar">
-      <button id="menuButton">MENU</button>
-      <span id="logo">study bruh</span>
-      <a href="contact.html">
-        <button id="contactButton">CONTACT</button>
-      </a>
-      
-    </header>
-
-    <!-- Hidden Full-Screen Menu -->
-    <div id="fullMenu">
-      <button id="closeMenu">X</button>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="timer/timer.html">Study Timer</a></li>
-        <li><a href="calendar/calendar.html">Calendar</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
+    <div id="navbar-container"></div>
 
     <main class="content">
-      <div class="big-text">START STUDYING BUD</div>
+      <div class="big-text" id="random-quote">Loading quote...</div>
 
       <div class="link-container">
         <a href="timer/timer.html" class="link-box">Timer</a>
@@ -41,7 +22,7 @@
       </div>
 
       <div id="third-box">
-        <a href="weather.html" class="link-box">Weather</a>
+        <a href="weather/weather.html" class="link-box">Weather</a>
       </div>
     </main>
 
@@ -61,6 +42,44 @@
       <div class="copyright">&copy; 2025 Study Bruh. All rights reserved.</div>
     </footer>
 
+    <script>
+      fetch("/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+          // Load navbar-specific JS only after navbar HTML is inserted
+          initNavbar();
+        })
+        .catch((error) => console.error("Error loading navbar:", error));
+
+      function initNavbar() {
+        const menuButton = document.getElementById("menuButton");
+        const closeMenuButton = document.getElementById("closeMenu");
+        const fullMenu = document.getElementById("fullMenu");
+
+        if (menuButton && closeMenuButton && fullMenu) {
+          menuButton.addEventListener("click", function () {
+            fullMenu.style.display = "flex";
+            // Force browser to acknowledge the display change before animating
+            setTimeout(function () {
+              // Position in middle of screen vertically (approximately)
+              fullMenu.style.top = "10%"; // This will position it near the top-middle
+            }, 10);
+          });
+
+          closeMenuButton.addEventListener("click", function () {
+            fullMenu.style.top = "-100vh";
+            setTimeout(function () {
+              fullMenu.style.display = "none";
+            }, 500);
+          });
+
+          console.log("Navbar event listeners set up successfully");
+        } else {
+          console.error("Navbar elements not found");
+        }
+      }
+    </script>
     <script src="script.js"></script>
   </body>
 </html>
