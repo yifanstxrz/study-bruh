@@ -34,6 +34,62 @@ let pomodoroPhase = "study"; // 'study', 'break', 'longBreak'
 let currentCycle = 1;
 let totalCycles = 4;
 
+// Function to save study session to localStorage
+function saveStudySession(duration) {
+  // Get existing sessions or initialize empty array
+  const existingSessions = localStorage.getItem('studySessions');
+  const sessions = existingSessions ? JSON.parse(existingSessions) : [];
+  
+  // Create new session object
+  const newSession = {
+    date: new Date().toISOString(),
+    duration: duration // Duration in minutes
+  };
+  
+  // Add to sessions array
+  sessions.push(newSession);
+  
+  // Save back to localStorage
+  localStorage.setItem('studySessions', JSON.stringify(sessions));
+  
+  console.log('Study session saved:', newSession);
+}
+
+// Function to save normal mode sessions
+function saveNormalModeSession() {
+  if (!isPomodoroMode) {
+    // Get the original input values to determine how long the session was
+    const hours = parseInt(hoursInput.value) || 0;
+    const minutes = parseInt(minutesInput.value) || 0;
+    const seconds = parseInt(secondsInput.value) || 0;
+    
+    // Convert total time to minutes (round up for seconds)
+    const durationMinutes = hours * 60 + minutes + (seconds > 0 ? 1 : 0);
+    
+    // Only save sessions that were more than 0 minutes
+    if (durationMinutes > 0) {
+      saveStudySession(durationMinutes);
+    }
+  }
+}
+
+// Function to save pomodoro study sessions
+function savePomodoroSession() {
+  if (isPomodoroMode && pomodoroPhase === "study") {
+    // Get study duration from inputs
+    const studyMinutes = parseInt(studyMinutesInput.value) || 0;
+    const studySeconds = parseInt(studySecondsInput.value) || 0;
+    
+    // Convert to minutes (round up for seconds)
+    const durationMinutes = studyMinutes + (studySeconds > 0 ? 1 : 0);
+    
+    // Only save sessions that were more than 0 minutes
+    if (durationMinutes > 0) {
+      saveStudySession(durationMinutes);
+    }
+  }
+}
+
 // Initialize timer display
 function initTimer() {
   if (isPomodoroMode) {
@@ -265,6 +321,9 @@ function startTimer() {
 
           // Alert when timer completes
           playSound();
+          
+          // Save study session to dashboard
+          saveNormalModeSession();
 
           // Use notification API if available
           if (
@@ -289,6 +348,11 @@ function startTimer() {
 // Handle completion of a Pomodoro phase with animations
 function handlePomodoroPhaseCompletion() {
   playSound();
+
+  // If we're completing a study session, save it to the dashboard
+  if (pomodoroPhase === "study") {
+    savePomodoroSession();
+  }
 
   // Add a flash animation to the timer
   timerDisplay.classList.add("phase-complete");
@@ -406,6 +470,9 @@ function handlePomodoroPhaseCompletion() {
       }, 100);
     }
 
+    // Show confetti animation for completing full pomodoro session
+    showConfetti();
+
     totalCycles = parseInt(cyclesInput.value) || 4;
     initTimer();
     return;
@@ -414,14 +481,25 @@ function handlePomodoroPhaseCompletion() {
   updateDisplay();
 }
 
-// Improved sound function with more browser compatibility
 function playSound() {
   try {
-    // Create a more noticeable completion sound
+    // Attempt to play the user's audio file first
+    const audio = new Audio("for_lovers.wav"); // Ensure file exists and is accessible
+    audio.play().catch((e) => {
+      console.log("Sound playback failed, switching to generated sound:", e);
+      generateBellSound(); // If file fails, play generated bell sound
+    });
+  } catch (e) {
+    console.log("Audio file playback failed, using fallback sound:", e);
+    generateBellSound();
+  }
+}
+
+// Function to generate a pleasant bell-like tone
+function generateBellSound() {
+  try {
     const audioContext = new (window.AudioContext ||
       window.webkitAudioContext)();
-
-    // Create a pleasant bell-like tone
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 
@@ -440,20 +518,8 @@ function playSound() {
 
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 1.5);
-
-    // Fallback to simple beep if Web Audio API fails
-  } catch (e) {
-    console.log("Web Audio API failed, using fallback sound:", e);
-    try {
-      const audio = new Audio(
-        "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVIGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLHPM7deeNwgZRqDj87FWER4nYr/y0mcMKiRQmdT7wV0NMixEiMn4z2kTOixBfvniyWEEMKU8BGCYsLzA2QJAttjUmx4XkQw5lcGgka+dMgF1/U1HGFL0RPVy0LiEt7dXBg/PWGQmXebPwpnJjFwEAXK+EWMzC8eFyq2biWMC72rLRGcZF8t6jeROpcVVAv9u0ENnHBbNaH/iOafEXgIOb9Y+ZyEXz2R9+TKmwWEFD23ZPWchFtFdghFQtMhdBRRs3TxlIBbRXQYpTLLKXAUbat86YyAY0l4KMESwzVsEI2fhOV8fGtVdDDU9r85cBSll4zdaGxzXXgVDOq3LXQUuY+c0Vh4e12AKSzOuxl4EN1/pMVQeH9hfEVAwqsZgBTxc7C5SHiHYYBZVLqjEYQZCWe0sUB4i2WEcWyemwmMGR1XwKk4dJNlhImEip8NjB01S8ShMHSXZYihmIKXCZAdUTvMmSh0n2mMsahujwmUHWkvzJEkdKNpjMm4Xo8FlCGBH9CJHHSrbYzdxFKLAZghlQ/UgRh0r2mQ6dBKgv2YIaT/2HkUdLdtkPXUPn79mCm079RxDHS7aZkB3DJ6+Zwpx"
-      );
-      audio.play().catch((e) => {
-        console.log("Sound playback failed:", e);
-      });
-    } catch (fallbackError) {
-      console.log("All sound methods failed:", fallbackError);
-    }
+  } catch (fallbackError) {
+    console.log("All sound methods failed:", fallbackError);
   }
 }
 
@@ -493,6 +559,10 @@ function togglePause() {
 
             // Alert when timer completes
             playSound();
+            
+            // Save study session to dashboard
+            saveNormalModeSession();
+            
             setTimeout(() => {
               alert("Time's up! Study session complete.");
             }, 100);
@@ -693,5 +763,21 @@ document.addEventListener("DOMContentLoaded", function () {
         .querySelectorAll("h1, h3, .timer-display")
         .forEach((el) => (el.style.color = ""));
     }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the current page filename
+  const currentPage = window.location.pathname.split('/').pop();
+  
+  // Select all navigation links
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  // Add active class to the current page link
+  navLinks.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (linkHref === currentPage) {
+          link.classList.add('active');
+      }
   });
 });
