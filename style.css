@@ -1,0 +1,169 @@
+/* Sticky Navbar */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#menuButton,
+#contactButton {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+}
+
+/* Full-Screen Dropdown Menu */
+#fullMenu {
+    width: 80vw;
+    height: 80vh;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    position: fixed;
+    top: -100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    transition: top 0.5s ease-in-out;
+    z-index: 9999;
+}
+
+#fullMenu ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+
+#fullMenu a {
+    font-family: "Courier New", Courier, monospace;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    display: block;
+    margin: 10px;
+}
+
+#closeMenu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Page Layout */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 120px;
+    /* Leaves room for sticky navbar */
+    padding-bottom: 100px;
+    /* Room above footer */
+}
+
+.big-text {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 64px;
+    font-weight: bold;
+    margin: 80px 20px 40px 20px;
+    text-align: center;
+}
+
+.link-container {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+#third-box {
+    margin-bottom: 150px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.link-box {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightgray;
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+.link-box:hover {
+    background: darkgray;
+}
+
+/* Footer */
+footer {
+    background: #f1f1f1;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 100px;
+}
+
+.newsletter input[type="email"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 250px;
+    max-width: 80%;
+}
+
+.newsletter button {
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .big-text {
+        font-size: 40px;
+    }
+
+    .link-box {
+        width: 80%;
+        height: 200px;
+        font-size: 20px;
+    }
+
+    .link-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+footer .copyright {
+    margin-top: 20px; /* Adds space above the text */
+    font-size: 14px;
+    color: #555;
+  }
