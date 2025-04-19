@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="weather.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Weather Dashboard</h1>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </header>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="locationInput"
+          placeholder="Enter city name, coordinates, or zip code"
+        />
+        <button id="addLocationBtn">Add Location</button>
+      </div>
+
+      <div class="locations-container" id="locationsContainer">
+        <!-- Weather cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <script src="weather.js"></script>
+  </body>
+</html>
