@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimalist Login</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+    <div class="container">
+      <div class="form-container">
+        <div class="form-header">
+          <h1 id="title">Sign In</h1>
+          <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <div class="toggle-switch">
+              <input type="checkbox" id="theme-toggle" />
+              <label for="theme-toggle"></label>
+            </div>
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+
+        <div id="notification" class="notification"></div>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input type="password" id="password" required />
+              <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+          </div>
+          <div class="options">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+            </div>
+            <a href="#" id="forgotPassword">Forgot Password?</a>
+          </div>
+          <button type="submit" id="submitBtn">Login</button>
+        </form>
+
+        <div class="form-footer">
+          <p id="switchText">
+            Don't have an account? <a href="#" id="switchForm">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="resetModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Reset Password</h2>
+        <div class="input-group">
+          <label for="resetUsername">Username</label>
+          <input type="text" id="resetUsername" required />
+        </div>
+        <div class="input-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" required />
+        </div>
+        <button id="resetPasswordBtn">Reset Password</button>
+      </div>
+    </div>
+
+    <script>
+      fetch("/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+          // Load navbar-specific JS only after navbar HTML is inserted
+          initNavbar();
+        })
+        .catch((error) => console.error("Error loading navbar:", error));
+
+      function initNavbar() {
+        const menuButton = document.getElementById("menuButton");
+        const closeMenuButton = document.getElementById("closeMenu");
+        const fullMenu = document.getElementById("fullMenu");
+
+        if (menuButton && closeMenuButton && fullMenu) {
+          menuButton.addEventListener("click", function () {
+            fullMenu.style.display = "flex";
+            // Force browser to acknowledge the display change before animating
+            setTimeout(function () {
+              // Position in middle of screen vertically (approximately)
+              fullMenu.style.top = "10%"; // This will position it near the top-middle
+            }, 10);
+          });
+
+          closeMenuButton.addEventListener("click", function () {
+            fullMenu.style.top = "-100vh";
+            setTimeout(function () {
+              fullMenu.style.display = "none";
+            }, 500);
+          });
+
+          console.log("Navbar event listeners set up successfully");
+        } else {
+          console.error("Navbar elements not found");
+        }
+      }
+    </script>
+    <script src="login.js"></script>
+  </body>
+</html>
