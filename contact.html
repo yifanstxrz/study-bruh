@@ -1,1 +1,192 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | StudyTimer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            padding: 1rem 0;
+        }
+        
+        .contact-info h2 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-item h3 {
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-bottom: 0.3rem;
+        }
+        
+        .info-item p, .info-item a {
+            color: #666;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        
+        .contact-form {
+            padding: 1rem 0;
+        }
+        
+        .contact-form h2 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>STUDYTIMER CONTACT</h1>
+            <p class="subtitle">Reach out with questions or feedback</p>
+        </header>
+        
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>CONTACT INFO</h2>
+                
+                <div class="info-item">
+                    <h3>EMAIL</h3>
+                    <a href="mailto:support@studytimer.app">support@studytimer.app</a>
+                </div>
+                
+                <div class="info-item">
+                    <h3>PHONE</h3>
+                    <a href="tel:+18005551234">+1 (800) 555-1234</a>
+                </div>
+                
+                <div class="info-item">
+                    <h3>ADDRESS</h3>
+                    <p>123 Productivity Lane<br>San Francisco, CA 94107</p>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2>SEND MESSAGE</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">EMAIL</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">MESSAGE</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
