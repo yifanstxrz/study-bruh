@@ -303,3 +303,37 @@ button:active {
         padding: 20px;
     }
 }
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: all var(--transition-speed);
+    z-index: 50;
+}
+
+.back-button:hover {
+    color: var(--primary-color);
+    transform: translateX(-2px);
+}
+
+.back-button i {
+    font-size: 16px;
+}
+
+/* Adjust container margin to avoid overlap with back button on mobile */
+@media (max-width: 480px) {
+    .container {
+        margin-top: 60px;
+    }
+}
