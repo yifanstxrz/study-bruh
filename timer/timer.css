@@ -1,365 +1,393 @@
-:root {
-    --primary-color: #4a6fa5;
-    --secondary-color: #e9ecef;
-    --text-color: #333;
-    --highlight-color: #6c8baf;
-    --event-color: #e9ecef;
-    --event-text: #333;
-    
-    /* Category Colors */
-    --meeting-color: #4a6fa5;
-    --party-color: #e67e22;
-    --exam-color: #e74c3c;
-    --personal-color: #2ecc71;
-    --other-color: #95a5a6;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-    background-color: #f8f9fa;
-    color: var(--text-color);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.current-date {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-}
-
-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: var(--highlight-color);
-}
-
-.calendar {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.month-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 15px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.month-name {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.month-nav {
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-}
-
-.month-nav:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    background-color: var(--secondary-color);
-    padding: 10px 0;
-    text-align: center;
-    font-weight: bold;
-}
-
-.days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    background-color: #eee;
-}
-
-.day {
-    background-color: white;
-    min-height: 100px;
-    padding: 5px;
-    position: relative;
-}
-
-.day-number {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.current-day {
-    background-color: rgba(74, 111, 165, 0.1);
-}
-
-.current-day .day-number {
-    color: var(--primary-color);
-}
-
-.other-month {
-    color: #aaa;
-    background-color: #f9f9f9;
-}
-
-.events {
-    margin-top: 5px;
-}
-
-.event {
-    margin-bottom: 3px;
-    padding: 2px 4px;
-    border-radius: 3px;
-    font-size: 12px;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-left: 3px solid;
-    color: white;
-}
-
-/* Event category styles */
-.meeting {
-    background-color: var(--meeting-color);
-    border-color: var(--meeting-color);
-}
-
-.party {
-    background-color: var(--party-color);
-    border-color: var(--party-color);
-}
-
-.exam {
-    background-color: var(--exam-color);
-    border-color: var(--exam-color);
-}
-
-.personal {
-    background-color: var(--personal-color);
-    border-color: var(--personal-color);
-}
-
-.other {
-    background-color: var(--other-color);
-    border-color: var(--other-color);
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transition: background 0.5s ease;
 }
 
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 500px;
+.timer-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.03);
+    padding: 2.5rem;
+    text-align: center;
+    width: 360px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
 }
 
-.modal-header {
+.timer-container:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 3px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-3px);
+}
+
+.app-title {
+    font-size: 1.9rem;
+    color: #2d3748;
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.mode-switch {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.75rem;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mode-button {
+    flex: 1;
+    background-color: #edf2f7;
+    border: none;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    color: #718096;
+}
+
+.mode-button.active {
+    color: white;
+    background-color: transparent;
+}
+
+.mode-switch::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 12px;
+    transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    z-index: 0;
+}
+
+/* Fix for pomodoro mode button highlighting */
+.mode-button:nth-child(2).active~.mode-switch::after,
+.mode-switch .mode-button:nth-child(2).active~ ::after {
+    transform: translateX(100%);
+}
+
+.timer-display {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+    color: #2d3748;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: -1px;
+}
+
+/* Pulsing animation for running timer */
+@keyframes timerPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.timer-running .timer-display {
+    animation: timerPulse 2s infinite;
+    color: #2d3748;
+}
+
+.timer-paused .timer-display {
+    color: #e53e3e;
+}
+
+.status-display {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 1.75rem;
+    height: 24px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    gap: 0.75rem;
+}
+
+.timer-button {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.85rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    background-size: 200% auto;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.timer-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.timer-button#startBtn {
+    background-image: linear-gradient(to right, #4CAF50 0%, #66BB6A 50%, #4CAF50 100%);
+}
+
+.timer-button#startBtn:hover {
+    background-position: right center;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.timer-button.pause {
+    background-image: linear-gradient(to right, #ff9800 0%, #ffb74d 50%, #ff9800 100%);
+}
+
+.timer-button.pause:hover {
+    background-position: right center;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.timer-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(50, 50, 93, 0.11), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.timer-button:focus {
+    outline: none;
+}
+
+.timer-button:active:after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+.timer-button:disabled {
+    background-image: linear-gradient(to right, #cbd5e0 0%, #e2e8f0 50%, #cbd5e0 100%);
+    color: #a0aec0;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.timer-button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    background-position: left;
+}
+
+.timer-settings {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-top: 1.75rem;
+    transition: all 0.4s ease;
+    opacity: 1;
+    max-height: 500px;
+    overflow: hidden;
 }
 
-.close {
-    cursor: pointer;
-    font-size: 24px;
+.timer-settings.hidden {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input, textarea, select {
+.time-inputs {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    gap: 0.75rem;
 }
 
-.btn-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+.time-input {
+    width: 30%;
+    /* Reduced from 33% to create more space between inputs */
+    text-align: center;
 }
 
-.btn-delete {
-    background-color: #dc3545;
-}
-
-.btn-delete:hover {
-    background-color: #c82333;
-}
-
-/* Daily view styles */
-.daily-view {
-    display: none;
-    flex-direction: column;
-    height: 600px;
-    background-color: white;
+.time-input input {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid #e2e8f0;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 20px;
-}
+    text-align: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 
-.time-slots {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-.time-slot {
-    display: flex;
-    border-bottom: 1px solid #eee;
-    height: 60px;
-    position: relative;
-}
-
-.time-label {
-    width: 60px;
-    font-size: 12px;
-    text-align: right;
-    padding: 5px;
-    color: #777;
-    flex-shrink: 0;
-}
-
-.slot-content {
-    flex-grow: 1;
-    padding: 5px;
-    position: relative;
-}
-
-.daily-event {
-    position: absolute;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: 12px;
-    width: calc(100% - 10px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: white;
-    z-index: 5;
-}
-
-/* Tag legend styles */
-.tag-legend {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.tag-legend h3 {
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.tag-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.tag-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.tag-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 3px;
-}
-
-.tag-name {
-    font-size: 14px;
-}
-
-@media (max-width: 768px) {
-    .days {
-        grid-template-columns: repeat(1, 1fr);
+    /* Hide spinner arrows in number inputs */
+    .time-input input::-webkit-outer-spin-button,
+    .time-input input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
-    
-    .weekdays {
-        display: none;
+
+    .time-input input:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(76, 175, 80, 0.1);
     }
-    
-    .day {
-        min-height: auto;
-        padding: 10px;
+
+    .time-input label {
+        display: block;
+        font-size: 0.85rem;
+        color: #718096;
+        margin-top: 0.5rem;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+
+    .pomodoro-inputs {
+        width: 100%;
+    }
+
+    .pomodoro-section {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #edf2f7;
+        padding-bottom: 1.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .pomodoro-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .pomodoro-section h3 {
+        font-size: 1.1rem;
+        color: #2d3748;
+        margin: 0.75rem 0;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .pomodoro-section .time-inputs {
+        justify-content: center;
+    }
+
+    .pomodoro-section .helper-text {
+        font-size: 0.8rem;
+        color: #a0aec0;
+        font-style: italic;
+        margin: 0.5rem 0 0;
+    }
+
+    /* Phase indicators for pomodoro mode */
+    .phase-indicator {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
+        margin: 0.5rem 0 1rem;
+        gap: 0.5rem;
     }
-    
-    .day::before {
-        content: attr(data-day);
-        font-weight: bold;
-        margin-bottom: 5px;
+
+    .phase-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #e2e8f0;
+        transition: all 0.3s ease;
     }
-    
-    .tag-items {
-        flex-direction: column;
-        gap: 8px;
+
+    .phase-dot.active {
+        background-color: #4CAF50;
+        transform: scale(1.2);
+    }
+
+    .phase-dot.break {
+        background-color: #ff9800;
+    }
+
+    .phase-dot.long-break {
+        background-color: #3182ce;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+        .timer-container {
+            width: 90%;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .timer-display {
+            font-size: 3.5rem;
+        }
+
+        .app-title {
+            font-size: 1.6rem;
+        }
+
+        .timer-controls {
+            flex-direction: column;
+        }
+
+        .timer-button {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-inputs {
+            flex-direction: column;
+        }
+
+        .time-input {
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
     }
 }
