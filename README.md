@@ -4,18 +4,18 @@ study smarter, not harder. made by students, for students. study bruh is an all 
 
 # features
 
-login & accounts: secure sign up and log-in to save your progress across devices  
-pomodoro study timer: pomodoro timer to boost focus and prevent burnout with scientifically-backed intervals  
-smart calendar: add, view, and manage tasks with ease. everything syncs and saves  
-weather dashboard: check the forecast in multiple locations so you can plan and balance your studying with going out  
-perforance dashboard: track your study time, weekly trends, and recent sessions to stay accountable  
+- login & accounts: secure sign up and log-in to save your progress across devices  
+- pomodoro study timer: pomodoro timer to boost focus and prevent burnout with scientifically-backed intervals  
+- smart calendar: add, view, and manage tasks with ease. everything syncs and saves  
+- weather dashboard: check the forecast in multiple locations so you can plan and balance your studying with going out  
+- perforance dashboard: track your study time, weekly trends, and recent sessions to stay accountable  
 
 # built with
 
-Firebase for authentication and real-time database  
-React / TailwindCSS for smooth and responsive UI  
-Chart.js for clean data visualizations  
-OpenMeteo API (Weather)  
+- Firebase for authentication and real-time database  
+- React / TailwindCSS for smooth and responsive UI  
+- Chart.js for clean data visualizations  
+- OpenMeteo API (Weather)  
 
 # why us?
 
