@@ -12,10 +12,10 @@ perforance dashboard: track your study time, weekly trends, and recent sessions 
 
 # built with
 
-Firebase for authentication and real-time database
-React / TailwindCSS for smooth and responsive UI
-Chart.js for clean data visualizations
-OpenMeteo API (Weather)
+Firebase for authentication and real-time database  
+React / TailwindCSS for smooth and responsive UI  
+Chart.js for clean data visualizations  
+OpenMeteo API (Weather)  
 
 # why us?
 
