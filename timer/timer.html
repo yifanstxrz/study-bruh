@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Timer</title>
+    <link rel="stylesheet" href="timer.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header id="navbar">
+      <button id="menuButton">MENU</button>
+      <span id="logo">study bruh</span>
+      <button id="contactButton">CONTACT</button>
+    </header>
+
+    <!-- Hidden Full-Screen Menu -->
+    <div id="fullMenu">
+      <button id="closeMenu">X</button>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="#services">Study Timer</a></li>
+        <li><a href="#contact">Calendar</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+    <div class="timer-container">
+      <h1 class="app-title">Study Timer</h1>
+
+      <div class="timer-display" id="timer">25:00</div>
+
+      <div class="timer-controls">
+        <button class="timer-button" id="startBtn">Start</button>
+        <button class="timer-button pause" id="pauseBtn" disabled>Pause</button>
+      </div>
+
+      <div class="timer-settings">
+        <div class="time-inputs">
+          <div class="time-input">
+            <input type="number" id="hours" min="0" max="23" value="0" />
+            <label for="hours">Hours</label>
+          </div>
+          <div class="time-input">
+            <input type="number" id="minutes" min="0" max="59" value="25" />
+            <label for="minutes">Minutes</label>
+          </div>
+          <div class="time-input">
+            <input type="number" id="seconds" min="0" max="59" value="0" />
+            <label for="seconds">Seconds</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="timer.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
