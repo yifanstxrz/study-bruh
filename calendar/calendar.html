@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimalistic Calendar</title>
+    <link rel="stylesheet" href="calendar.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header id="navbar">
+      <button id="menuButton">MENU</button>
+      <span id="logo">study bruh</span>
+      <button id="contactButton" href="contact.html">CONTACT</button>
+    </header>
+
+    <!-- Hidden Full-Screen Menu -->
+    <div id="fullMenu">
+      <button id="closeMenu">X</button>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../timer/timer.html">Study Timer</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+    <div class="container">
+      <header>
+        <div class="current-date" id="current-date"></div>
+        <div class="controls">
+          <button id="today-btn">Today</button>
+          <button id="month-view-btn">Month</button>
+          <button id="day-view-btn">Day</button>
+          <button id="add-event-btn">Add Event</button>
+        </div>
+      </header>
+
+      <div class="calendar" id="month-view">
+        <div class="month-header">
+          <div class="month-nav" id="prev-month">&lt;</div>
+          <div class="month-name" id="month-name"></div>
+          <div class="month-nav" id="next-month">&gt;</div>
+        </div>
+        <div class="weekdays">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div class="days" id="calendar-days"></div>
+      </div>
+
+      <div class="daily-view" id="daily-view">
+        <div class="month-header">
+          <div class="month-nav" id="prev-day">&lt;</div>
+          <div class="month-name" id="day-name"></div>
+          <div class="month-nav" id="next-day">&gt;</div>
+        </div>
+        <div class="time-slots" id="time-slots"></div>
+      </div>
+
+      <div class="tag-legend">
+        <h3>Event Categories</h3>
+        <div class="tag-items">
+          <div class="tag-item">
+            <div class="tag-color meeting"></div>
+            <div class="tag-name">Meeting</div>
+          </div>
+          <div class="tag-item">
+            <div class="tag-color party"></div>
+            <div class="tag-name">Party</div>
+          </div>
+          <div class="tag-item">
+            <div class="tag-color exam"></div>
+            <div class="tag-name">Exam</div>
+          </div>
+          <div class="tag-item">
+            <div class="tag-color personal"></div>
+            <div class="tag-name">Personal</div>
+          </div>
+          <div class="tag-item">
+            <div class="tag-color other"></div>
+            <div class="tag-name">Other</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="event-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">Add Event</h2>
+          <span class="close" id="close-modal">&times;</span>
+        </div>
+        <form id="event-form">
+          <input type="hidden" id="event-id" />
+          <div class="form-group">
+            <label for="event-title">Title</label>
+            <input type="text" id="event-title" required />
+          </div>
+          <div class="form-group">
+            <label for="event-date">Date</label>
+            <input type="date" id="event-date" required />
+          </div>
+          <div class="form-group">
+            <label for="event-start-time">Start Time</label>
+            <input type="time" id="event-start-time" required />
+          </div>
+          <div class="form-group">
+            <label for="event-end-time">End Time</label>
+            <input type="time" id="event-end-time" required />
+          </div>
+          <div class="form-group">
+            <label for="event-category">Category</label>
+            <select id="event-category" required>
+              <option value="meeting">Meeting</option>
+              <option value="party">Party</option>
+              <option value="exam">Exam</option>
+              <option value="personal">Personal</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="event-description">Description</label>
+            <textarea id="event-description" rows="3"></textarea>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              id="delete-event"
+              class="btn-delete"
+              style="display: none"
+            >
+              Delete
+            </button>
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="calendar.js"></script>
+    <script src="../script.js" async></script>
+  </body>
+</html>
