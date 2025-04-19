@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Courier New', 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,6 +7,7 @@ body {
     margin: 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     transition: background 0.5s ease;
+    padding-right: 38px;
 }
 
 .timer-container {
@@ -77,8 +78,8 @@ body {
 }
 
 /* Fix for pomodoro mode button highlighting */
-.mode-button:nth-child(2).active~.mode-switch::after,
-.mode-switch .mode-button:nth-child(2).active~ ::after {
+.mode-button:nth-child(2).active ~ .mode-switch::after,
+.mode-switch .mode-button:nth-child(2).active ~ ::after {
     transform: translateX(100%);
 }
 
@@ -94,20 +95,9 @@ body {
 
 /* Pulsing animation for running timer */
 @keyframes timerPulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.02);
-        opacity: 0.9;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .timer-running .timer-display {
@@ -203,12 +193,10 @@ body {
         transform: scale(0, 0);
         opacity: 1;
     }
-
     20% {
         transform: scale(25, 25);
         opacity: 1;
     }
-
     100% {
         opacity: 0;
         transform: scale(40, 40);
@@ -254,8 +242,7 @@ body {
 }
 
 .time-input {
-    width: 30%;
-    /* Reduced from 33% to create more space between inputs */
+    width: 30%; /* Reduced from 33% to create more space between inputs */
     text-align: center;
 }
 
@@ -268,126 +255,128 @@ body {
     font-size: 1rem;
     transition: all 0.2s ease;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-
-    /* Hide spinner arrows in number inputs */
-    .time-input input::-webkit-outer-spin-button,
-    .time-input input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .time-input input:focus {
-        outline: none;
-        border-color: #4CAF50;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(76, 175, 80, 0.1);
-    }
-
-    .time-input label {
-        display: block;
-        font-size: 0.85rem;
-        color: #718096;
-        margin-top: 0.5rem;
-        transition: all 0.2s ease;
-        font-weight: 500;
-    }
-
-    .pomodoro-inputs {
-        width: 100%;
-    }
-
-    .pomodoro-section {
-        margin-bottom: 1.5rem;
-        border-bottom: 1px solid #edf2f7;
-        padding-bottom: 1.25rem;
-        transition: all 0.3s ease;
-    }
-
-    .pomodoro-section:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .pomodoro-section h3 {
-        font-size: 1.1rem;
-        color: #2d3748;
-        margin: 0.75rem 0;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-
-    .pomodoro-section .time-inputs {
-        justify-content: center;
-    }
-
-    .pomodoro-section .helper-text {
-        font-size: 0.8rem;
-        color: #a0aec0;
-        font-style: italic;
-        margin: 0.5rem 0 0;
-    }
-
-    /* Phase indicators for pomodoro mode */
-    .phase-indicator {
-        display: flex;
-        justify-content: center;
-        margin: 0.5rem 0 1rem;
-        gap: 0.5rem;
-    }
-
-    .phase-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #e2e8f0;
-        transition: all 0.3s ease;
-    }
-
-    .phase-dot.active {
-        background-color: #4CAF50;
-        transform: scale(1.2);
-    }
-
-    .phase-dot.break {
-        background-color: #ff9800;
-    }
-
-    .phase-dot.long-break {
-        background-color: #3182ce;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-        .timer-container {
-            width: 90%;
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-
-        .timer-display {
-            font-size: 3.5rem;
-        }
-
-        .app-title {
-            font-size: 1.6rem;
-        }
-
-        .timer-controls {
-            flex-direction: column;
-        }
-
-        .timer-button {
-            width: 100%;
-            margin-bottom: 0.5rem;
-        }
-
-        .time-inputs {
-            flex-direction: column;
-        }
-
-        .time-input {
-            width: 100%;
-            margin-bottom: 0.75rem;
-        }
-    }
 }
+
+/* Hide spinner arrows in number inputs */
+.time-input input::-webkit-outer-spin-button,
+.time-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.time-input input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.time-input label {
+    display: block;
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.pomodoro-inputs {
+    width: 100%;
+}
+
+.pomodoro-section {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.pomodoro-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.pomodoro-section h3 {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin: 0.75rem 0;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.pomodoro-section .time-inputs {
+    justify-content: center;
+}
+
+.pomodoro-section .helper-text {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    font-style: italic;
+    margin: 0.5rem 0 0;
+}
+
+/* Phase indicators for pomodoro mode */
+.phase-indicator {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0 1rem;
+    gap: 0.5rem;
+}
+
+.phase-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.phase-dot.active {
+    background-color: #4CAF50;
+    transform: scale(1.2);
+}
+
+.phase-dot.break {
+    background-color: #ff9800;
+}
+
+.phase-dot.long-break {
+    background-color: #3182ce;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .timer-container {
+        width: 90%;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+    
+    .timer-display {
+        font-size: 3.5rem;
+    }
+    
+    .app-title {
+        font-size: 1.6rem;
+    }
+    
+    .timer-controls {
+        flex-direction: column;
+    }
+    
+    .timer-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .time-inputs {
+        flex-direction: column;
+    }
+    
+    .time-input {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+    
+}
+
