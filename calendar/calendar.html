@@ -4,27 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minimalistic Calendar</title>
-    <link rel="stylesheet" href="calendar.css" />
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="calendar.css" />
   </head>
   <body>
-    <header id="navbar">
-      <button id="menuButton">MENU</button>
-      <span id="logo">study bruh</span>
-      <button id="contactButton" href="contact.html">CONTACT</button>
-    </header>
-
-    <!-- Hidden Full-Screen Menu -->
-    <div id="fullMenu">
-      <button id="closeMenu">X</button>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../timer/timer.html">Study Timer</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
+    <div id="navbar-container"></div>
     <div class="container">
       <header>
         <div class="current-date" id="current-date"></div>
@@ -145,5 +129,43 @@
 
     <script src="calendar.js"></script>
     <script src="../script.js" async></script>
+    <script>
+      fetch("/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+          // Load navbar-specific JS only after navbar HTML is inserted
+          initNavbar();
+        })
+        .catch((error) => console.error("Error loading navbar:", error));
+
+      function initNavbar() {
+        const menuButton = document.getElementById("menuButton");
+        const closeMenuButton = document.getElementById("closeMenu");
+        const fullMenu = document.getElementById("fullMenu");
+
+        if (menuButton && closeMenuButton && fullMenu) {
+          menuButton.addEventListener("click", function () {
+            fullMenu.style.display = "flex";
+            // Force browser to acknowledge the display change before animating
+            setTimeout(function () {
+              // Position in middle of screen vertically (approximately)
+              fullMenu.style.top = "10%"; // This will position it near the top-middle
+            }, 10);
+          });
+
+          closeMenuButton.addEventListener("click", function () {
+            fullMenu.style.top = "-100vh";
+            setTimeout(function () {
+              fullMenu.style.display = "none";
+            }, 500);
+          });
+
+          console.log("Navbar event listeners set up successfully");
+        } else {
+          console.error("Navbar elements not found");
+        }
+      }
+    </script>
   </body>
 </html>
