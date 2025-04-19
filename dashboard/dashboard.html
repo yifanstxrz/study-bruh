@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>study bruh | Dashboard</title>
+    <link rel="stylesheet" href="/../style.css"/>
+    <link rel="stylesheet" href="dashboard.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+    <div class="dashboard-container">
+      <header>
+        <h1>Study Dashboard</h1>
+        <p class="date" id="currentDate"></p>
+      </header>
+
+      <div class="dashboard-grid">
+        <section class="stats-card">
+          <h2>Study Statistics</h2>
+          <div class="stat-item">
+            <span class="stat-label">Total Time Studied</span>
+            <span class="stat-value" id="totalTimeStudied">0h 0m</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Sessions This Week</span>
+            <span class="stat-value" id="sessionCount">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Average Session Length</span>
+            <span class="stat-value" id="averageSession">0m</span>
+          </div>
+        </section>
+
+        <section class="chart-card">
+          <h2>Weekly Study Activity</h2>
+          <div class="chart-container">
+            <canvas id="studyChart"></canvas>
+          </div>
+        </section>
+
+        <section class="sessions-card">
+          <h2>Recent Study Sessions</h2>
+          <div class="sessions-list" id="sessionsList">
+            <!-- Sessions will be populated by JavaScript -->
+            <div class="empty-state">No study sessions recorded yet</div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="/script.js" async></script>
+    <script>
+      fetch("/navbar.html")
+        .then((response) => response.text())
+        .then(
+          (data) =>
+            (document.getElementById("navbar-container").innerHTML = data)
+        )
+        .catch((error) => console.error("Error loading navbar:", error));
+    </script>
+  </body>
+</html>
