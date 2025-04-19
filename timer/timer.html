@@ -1,63 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Timer</title>
-    <link rel="stylesheet" href="timer.css" />
-    <link rel="stylesheet" href="../style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <header id="navbar">
-      <button id="menuButton">MENU</button>
-      <span id="logo">study bruh</span>
-      <button id="contactButton">CONTACT</button>
-    </header>
-
-    <!-- Hidden Full-Screen Menu -->
-    <div id="fullMenu">
-      <button id="closeMenu">X</button>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="#services">Study Timer</a></li>
-        <li><a href="#contact">Calendar</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </div>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="timer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
     <div class="timer-container">
-      <h1 class="app-title">Study Timer</h1>
-
-      <div class="timer-display" id="timer">25:00</div>
-
-      <div class="timer-controls">
-        <button class="timer-button" id="startBtn">Start</button>
-        <button class="timer-button pause" id="pauseBtn" disabled>Pause</button>
-      </div>
-
-      <div class="timer-settings">
-        <div class="time-inputs">
-          <div class="time-input">
-            <input type="number" id="hours" min="0" max="23" value="0" />
-            <label for="hours">Hours</label>
-          </div>
-          <div class="time-input">
-            <input type="number" id="minutes" min="0" max="59" value="25" />
-            <label for="minutes">Minutes</label>
-          </div>
-          <div class="time-input">
-            <input type="number" id="seconds" min="0" max="59" value="0" />
-            <label for="seconds">Seconds</label>
-          </div>
+        <h1 class="app-title">Study Timer</h1>
+        
+        <div class="mode-switch">
+            <button class="mode-button active" id="normalMode">Normal Mode</button>
+            <button class="mode-button" id="pomodoroMode">Pomodoro Mode</button>
         </div>
-      </div>
+        
+        <div class="timer-display" id="timer">25:00</div>
+        <div class="status-display" id="statusDisplay">Ready to start</div>
+        
+        <!-- Phase indicator dots for Pomodoro mode -->
+        <div class="phase-indicator" id="phaseIndicator"></div>
+        
+        <div class="timer-controls">
+            <button class="timer-button" id="startBtn">Start</button>
+            <button class="timer-button pause" id="pauseBtn" disabled>Pause</button>
+        </div>
+        
+        <!-- Normal Mode Settings -->
+        <div class="timer-settings" id="normalSettings">
+            <div class="time-inputs">
+                <div class="time-input">
+                    <input type="number" id="hours" min="0" max="23" value="0">
+                    <label for="hours">Hours</label>
+                </div>
+                <div class="time-input">
+                    <input type="number" id="minutes" min="0" max="59" value="25">
+                    <label for="minutes">Minutes</label>
+                </div>
+                <div class="time-input">
+                    <input type="number" id="seconds" min="0" max="59" value="0">
+                    <label for="seconds">Seconds</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pomodoro Mode Settings -->
+        <div class="timer-settings hidden" id="pomodoroSettings">
+            <div class="pomodoro-inputs">
+                <div class="pomodoro-section">
+                    <h3>Study Session</h3>
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <input type="number" id="studyMinutes" min="1" max="120" value="25">
+                            <label for="studyMinutes">Minutes</label>
+                        </div>
+                        <div class="time-input">
+                            <input type="number" id="studySeconds" min="0" max="59" value="0">
+                            <label for="studySeconds">Seconds</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pomodoro-section">
+                    <h3>Break</h3>
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <input type="number" id="breakMinutes" min="1" max="60" value="5">
+                            <label for="breakMinutes">Minutes</label>
+                        </div>
+                        <div class="time-input">
+                            <input type="number" id="breakSeconds" min="0" max="59" value="0">
+                            <label for="breakSeconds">Seconds</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pomodoro-section">
+                    <h3>Cycles</h3>
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <input type="number" id="cycles" min="1" max="10" value="4">
+                            <label for="cycles">Cycles</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pomodoro-section">
+                    <h3>Long Break</h3>
+                    <div class="time-inputs">
+                        <div class="time-input">
+                            <input type="number" id="longBreakMinutes" min="5" max="60" value="15">
+                            <label for="longBreakMinutes">Minutes</label>
+                        </div>
+                        <div class="time-input">
+                            <input type="number" id="longBreakSeconds" min="0" max="59" value="0">
+                            <label for="longBreakSeconds">Seconds</label>
+                        </div>
+                    </div>
+                    <p class="helper-text">After all cycles complete</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="timer.js"></script>
-    <script src="../script.js"></script>
-  </body>
+</body>
 </html>
